@@ -1,37 +1,18 @@
 import { Component } from '@angular/core';
+import { HeroComponent } from '../components/hero.component';
 
 @Component({
   selector: 'app-home',
   template: `
-    <h2>Analog</h2>
-
-    <h3>The fullstack meta-framework for Angular!</h3>
-
-    <p class="read-the-docs">
-      <a href="https://analogjs.org" target="_blank">Docs</a> |
-      <a href="https://github.com/analogjs/analog" target="_blank">GitHub</a> |
-      <a href="https://github.com/sponsors/brandonroberts" target="_blank">
-        Sponsor
-      </a>
-    </p>
+    <app-hero>
+      <h1>Welcome to my meta-framework-powered semantic HTML website.</h1>
+      <p>This is the home page of our AnalogJS application.</p>
+    </app-hero>
   `,
-  styles: `
-    :host {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .read-the-docs > * {
-      color: #fff;
-    }
-
-    @media (prefers-color-scheme: light) {
-      .read-the-docs > * {
-        color: #213547;
-      }
-    }
-  `,
+  imports: [HeroComponent],
 })
-export default class Home {}
+export default class Home {
+  onCallToActionClicked() {
+    alert('Call to action button clicked!');
+  }
+}
