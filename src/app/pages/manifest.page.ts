@@ -8,6 +8,7 @@ import { HeroComponent } from '../components/hero.component';
 import { HighlightPipe } from '../pipes/highlight.pipe';
 
 @Component({
+  selector: 'app-manifest',
   template: `
     <h1>📜&nbsp;Manifest</h1>
     <p>A manifest is a document that lists the cargo, passengers, and crew of a ship, aircraft, or vehicle, used for customs and other official purposes.  

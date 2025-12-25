@@ -1,11 +1,13 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { Component, computed, effect, inject, Input, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 import { HeroComponent } from '../components/hero.component';
 import { HighlightPipe } from '../pipes/highlight.pipe';
+import { injectLoad, LoadResult } from '@analogjs/router';
+import { load } from './glossary.server';
 
 @Component({
   template: `
@@ -14,21 +16,28 @@ import { HighlightPipe } from '../pipes/highlight.pipe';
     <input type="search" 
            placeholder="Search terms..." 
            [(ngModel)]="searchTerm" />
-    <ul>
-      @for (entry of filteredEntries(); track entry.id) {
+    <ul [aria-busy]="!data().loaded">
+      @for (entry of filteredEntries(); track entry.fields.id.stringValue) {
         <li>
-          <strong [innerHtml]="entry.term | highlight: searchTerm()"></strong>
-          <span>&nbsp;-&nbsp;{{ entry.definition }}</span>
-          @if(entry.externalLink) {
-            &nbsp;<a [href]="entry.externalLink" target="_blank" rel="noopener noreferrer" data-tooltip="External Link">[Learn more]</a>
+          <strong [innerHtml]="entry.fields.term.stringValue| highlight: searchTerm()"></strong>
+          <span>&nbsp;-&nbsp;{{ entry.fields.description.stringValue }}</span>
+          @if(entry.fields.externalLink?.stringValue) {
+            &nbsp;<a [href]="entry.fields.externalLink?.stringValue" target="_blank" rel="noopener noreferrer" data-tooltip="External Link">[Learn more]</a>
           }
         </li>
       }
     </ul>
   `,
-  imports: [HeroComponent, HighlightPipe, FormsModule, AsyncPipe],
+  imports: [HeroComponent, JsonPipe, HighlightPipe, FormsModule, AsyncPipe],
 })
 export default class Glossary {
+
+  @Input() load(data: LoadResult<typeof load>) {
+    console.log(data); // logs { loaded: true }
+  }
+
+  protected readonly data = toSignal(injectLoad<typeof load>(), { requireSync: true });
+
   private readonly route = inject(ActivatedRoute);
   private readonly searchQueryParam = toSignal(this.route.queryParamMap.pipe(map(params => params.get('search') || '')));
   protected readonly searchTerm = signal('');
@@ -69,10 +78,11 @@ export default class Glossary {
 
   protected readonly filteredEntries = computed(() => {
     const term = this.searchTerm().toLowerCase();
-    return this.entries.filter(entry =>
-      entry.term.toLowerCase().includes(term) ||
-      entry.definition.toLowerCase().includes(term)
-    );
+    const entries = this.data().terms?.documents ?? [];
+    return entries.filter(entry =>
+      entry.fields.term.stringValue.toLowerCase().includes(term) ||
+      entry.fields.description.stringValue.toLowerCase().includes(term)
+    ).sort((a, b) => a.fields.term.stringValue.localeCompare(b.fields.term.stringValue));
   });
 
   constructor() {
