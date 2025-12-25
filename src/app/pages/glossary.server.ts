@@ -1,14 +1,9 @@
 import { PageServerLoad } from '@analogjs/router';
 
 export const prerender = false;
+export const runtime = 'nodejs';
 
-export const load = async ({
-  params, // params/queryParams from the request
-  req, // H3 Request
-  res, // H3 Response handler
-  fetch, // internal fetch for direct API calls,
-  event, // full request event
-}: PageServerLoad) => {
+export const load = async (pageServerLoad: PageServerLoad) => {
   return {
     loaded: true,
   };
