@@ -21,7 +21,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withFetch(),
       withInterceptors([requestContextInterceptor])
-    ),
-    provideClientHydration(withEventReplay()),
+    )  
   ],
 };

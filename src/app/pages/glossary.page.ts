@@ -82,13 +82,13 @@ export default class Glossary {
     return entries.filter(entry =>
       entry.fields.term.stringValue.toLowerCase().includes(term) ||
       entry.fields.description.stringValue.toLowerCase().includes(term)
-    ).sort((a, b) => a.fields.term.stringValue.localeCompare(b.fields.term.stringValue));
+    );
   });
 
   constructor() {
     effect(async () => {
       this.searchTerm.set(this.searchQueryParam() ?? '');
-    }, {allowSignalWrites: true});
+    });
   }
 
 }

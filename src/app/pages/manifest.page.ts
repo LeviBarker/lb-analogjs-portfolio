@@ -79,7 +79,7 @@ export default class Manifest {
   constructor() {
     effect(async () => {
       this.searchTerm.set(this.searchQueryParam() ?? '');
-    }, {allowSignalWrites: true});
+    });
   }
 
 }
