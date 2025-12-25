@@ -10,7 +10,7 @@ import { HighlightPipe } from '../pipes/highlight.pipe';
 @Component({
   template: `
     <h1>📚&nbsp;Glossary</h1>
-    <p>Results are stored in a <a href="#">cloud document store</a> and fetched via an <a href="/glossary?search=http">HTTP</a> request to a <a href="#">serverless cloud function</a>.</p>
+    <p>Results are retrieved from a <a href="#">cloud document store</a> via an <a href="/glossary?search=http">HTTP</a> request to a <a href="#">serverless cloud function</a>.</p>
     <input type="search" 
            placeholder="Search terms..." 
            [(ngModel)]="searchTerm" />
@@ -20,7 +20,7 @@ import { HighlightPipe } from '../pipes/highlight.pipe';
           <strong [innerHtml]="entry.term | highlight: searchTerm()"></strong>
           <span>&nbsp;-&nbsp;{{ entry.definition }}</span>
           @if(entry.externalLink) {
-            &nbsp;<a [href]="entry.externalLink" target="_blank" rel="noopener noreferrer">[Learn more]</a>
+            &nbsp;<a [href]="entry.externalLink" target="_blank" rel="noopener noreferrer" data-tooltip="External Link">[Learn more]</a>
           }
         </li>
       }
