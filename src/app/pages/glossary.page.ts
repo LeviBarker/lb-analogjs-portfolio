@@ -32,10 +32,6 @@ import { load } from './glossary.server';
 })
 export default class Glossary {
 
-  @Input() load(data: LoadResult<typeof load>) {
-    console.log(data); // logs { loaded: true }
-  }
-
   protected readonly data = toSignal(injectLoad<typeof load>(), { requireSync: true });
 
   private readonly route = inject(ActivatedRoute);

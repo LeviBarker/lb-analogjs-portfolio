@@ -15,7 +15,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideFileRouter(
-      withComponentInputBinding(),
       withNavigationErrorHandler(console.error),
     ),    
     provideHttpClient(
