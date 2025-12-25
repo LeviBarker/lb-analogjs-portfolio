@@ -89,6 +89,13 @@ export default class Glossary {
     effect(async () => {
       this.searchTerm.set(this.searchQueryParam() ?? '');
     });
+
+    effect(async () => {
+      const error = this.data().error;
+      if(error) {
+          console.warn(error);
+      }
+    })
   }
 
 }
