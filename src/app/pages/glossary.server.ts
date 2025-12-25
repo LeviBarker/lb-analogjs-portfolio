@@ -2,7 +2,13 @@
 import { PageServerLoad } from '@analogjs/router';
 import { GlossaryResponse } from '../services/glossary.service';
 
-export const load = async ({}: PageServerLoad) => {
+export const load = async ({
+  params, // params/queryParams from the request
+  req, // H3 Request
+  res, // H3 Response handler
+  fetch, // internal fetch for direct API calls,
+  event, // full request event
+}: PageServerLoad) => {
 
     // let terms: GlossaryResponse | null = null;
     // let error = null;
@@ -20,12 +26,11 @@ export const load = async ({}: PageServerLoad) => {
     //     error = `Failed to fetch glossary terms: ${response?.status} ${response?.statusText}`;
     // }
 
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos/1')
-      .then(response => response.json());
+    // const response = await fetch('https://firestore.googleapis.com/v1/projects/levi-barker-product/databases/(default)/documents/glossary');
 
   return {
     // terms,
-    response,
+    response: [],
     loaded: true,
     error: null,
   };
