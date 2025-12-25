@@ -7,7 +7,7 @@ import { map } from 'rxjs';
 import { HeroComponent } from '../components/hero.component';
 import { HighlightPipe } from '../pipes/highlight.pipe';
 import { injectLoad, LoadResult } from '@analogjs/router';
-import { load } from './glossary.server';
+import { GlossaryResponse } from '../services/glossary.service';
 
 @Component({
   template: `
@@ -32,7 +32,7 @@ import { load } from './glossary.server';
 })
 export default class Glossary {
 
-  protected readonly data = toSignal(injectLoad<typeof load>(), { requireSync: true });
+  protected readonly data = toSignal(injectLoad(), { requireSync: true });
 
   private readonly route = inject(ActivatedRoute);
   private readonly searchQueryParam = toSignal(this.route.queryParamMap.pipe(map(params => params.get('search') || '')));
