@@ -1,4 +1,4 @@
-import { Component, input, output } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
     selector: "app-hero",
@@ -11,8 +11,7 @@ import { Component, input, output } from "@angular/core";
   `,
   styles: [`
     .hero {
-        border: 1px solid red;
-        height: calc(100vh - 2rem);
+        height: calc(100vh - 56px);
         display: flex;
         justify-content: center;
         align-items: center;

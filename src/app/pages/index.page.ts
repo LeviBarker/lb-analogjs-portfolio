@@ -5,8 +5,8 @@ import { HeroComponent } from '../components/hero.component';
   selector: 'app-home',
   template: `
     <app-hero>
-      <h1>Welcome to my meta-framework-powered semantic HTML website.</h1>
-      <p>This is the home page of our AnalogJS application.</p>
+      <h1>Hi, I'm Levi, welcome to my <a href="/glossary?search=semantic">semantic</a>, <a href="/glossary?search=ssr">server-side-rendered</a>, <a href="/glossary?search=meta-framework">meta-framework</a>-powered website.</h1>
+      <p>In addition to linking to various projects I've worked on, this site aims to showcase the power of modern web development frameworks and paradigms.</p>
     </app-hero>
   `,
   imports: [HeroComponent],

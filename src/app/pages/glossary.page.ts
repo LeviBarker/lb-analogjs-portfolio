@@ -9,14 +9,19 @@ import { HighlightPipe } from '../pipes/highlight.pipe';
 
 @Component({
   template: `
+    <h1>📚&nbsp;Glossary</h1>
+    <p>Results are stored in a <a href="#">cloud document store</a> and fetched via an <a href="/glossary?search=http">HTTP</a> request to a <a href="#">serverless cloud function</a>.</p>
     <input type="search" 
-           placeholder="Search glossary..." 
+           placeholder="Search terms..." 
            [(ngModel)]="searchTerm" />
     <ul>
       @for (entry of filteredEntries(); track entry.id) {
         <li>
           <strong [innerHtml]="entry.term | highlight: searchTerm()"></strong>
           <span>&nbsp;-&nbsp;{{ entry.definition }}</span>
+          @if(entry.externalLink) {
+            &nbsp;<a [href]="entry.externalLink" target="_blank" rel="noopener noreferrer">[Learn more]</a>
+          }
         </li>
       }
     </ul>
@@ -32,12 +37,33 @@ export default class Glossary {
     {
       id: 'meta-framework',
       term: 'meta-framework',
+      externalLink: 'https://analogjs.org',
       definition: 'A meta-framework is a higher-level framework built on top of existing frameworks to provide additional features and abstractions.',
     },
     {
       id: 'semantic-html',
       term: 'semantic HTML',
       definition: 'Semantic HTML refers to the use of HTML elements that convey meaning and structure, improving accessibility and SEO.',
+    },
+    {
+      id: 'http',
+      term: 'HTTP',
+      definition: 'HTTP (Hypertext Transfer Protocol) is the foundation of data communication on the World Wide Web, enabling the transfer of resources between clients and servers.',
+    },
+    {
+      id: 'server-side-rendering',
+      term: 'server-side rendering (SSR)',
+      definition: 'Server-side rendering (SSR) is the process of generating HTML content on the server and sending it to the client, improving performance and SEO.',
+    },
+    {
+      id: 'cloud-document-store',
+      term: 'cloud document store',
+      definition: 'A cloud document store is a type of NoSQL database that stores data in a flexible, document-oriented format, allowing for easy scalability and accessibility over the internet.',
+    },
+    {
+      id: 'serverless-cloud-function',
+      term: 'serverless cloud function',
+      definition: 'A serverless cloud function is a lightweight, event-driven piece of code that runs in a cloud environment without the need to manage server infrastructure.',
     }
   ]
 
