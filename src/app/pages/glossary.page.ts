@@ -32,7 +32,7 @@ import { GlossaryResponse } from '../services/glossary.service';
 })
 export default class Glossary {
 
-  protected readonly data = toSignal(injectLoad(), { requireSync: true });
+  protected readonly data = toSignal(injectLoad());
 
   private readonly route = inject(ActivatedRoute);
   private readonly searchQueryParam = toSignal(this.route.queryParamMap.pipe(map(params => params.get('search') || '')));
