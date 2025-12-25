@@ -1,5 +1,7 @@
 import { PageServerLoad } from '@analogjs/router';
 
+export const prerender = false;
+
 export const load = async ({
   params, // params/queryParams from the request
   req, // H3 Request
