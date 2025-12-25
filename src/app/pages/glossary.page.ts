@@ -16,7 +16,7 @@ import { load } from './glossary.server';
     <input type="search" 
            placeholder="Search terms..." 
            [(ngModel)]="searchTerm" />
-    <ul [aria-busy]="!data().loaded">
+    <!-- <ul [aria-busy]="!data().loaded">
       @for (entry of filteredEntries(); track entry.fields.id.stringValue) {
         <li>
           <strong [innerHtml]="entry.fields.term.stringValue| highlight: searchTerm()"></strong>
@@ -26,7 +26,7 @@ import { load } from './glossary.server';
           }
         </li>
       }
-    </ul>
+    </ul> -->
   `,
   imports: [HeroComponent, JsonPipe, HighlightPipe, FormsModule, AsyncPipe],
 })
@@ -78,11 +78,11 @@ export default class Glossary {
 
   protected readonly filteredEntries = computed(() => {
     const term = this.searchTerm().toLowerCase();
-    const entries = this.data().terms?.documents ?? [];
-    return entries.filter(entry =>
-      entry.fields.term.stringValue.toLowerCase().includes(term) ||
-      entry.fields.description.stringValue.toLowerCase().includes(term)
-    );
+    // const entries = this.data().terms?.documents ?? [];
+    // return entries.filter(entry =>
+    //   entry.fields.term.stringValue.toLowerCase().includes(term) ||
+    //   entry.fields.description.stringValue.toLowerCase().includes(term)
+    // );
   });
 
   constructor() {
@@ -91,10 +91,8 @@ export default class Glossary {
     });
 
     effect(async () => {
-      const error = this.data().error;
-      if(error) {
-          console.warn(error);
-      }
+      const data = this.data();
+      console.log(data);
     })
   }
 

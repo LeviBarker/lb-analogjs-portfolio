@@ -11,7 +11,7 @@ export const load = async ({}: PageServerLoad) => {
   
     try {
         response = await fetch('https://firestore.googleapis.com/v1/projects/levi-barker-product/databases/(default)/documents/glossary')
-        terms = await response.json();
+        // terms = await response.json();
     } catch (e) {
         error = e;
     }
@@ -21,7 +21,8 @@ export const load = async ({}: PageServerLoad) => {
     }
 
   return {
-    terms,
+    // terms,
+    response,
     loaded: true,
     error,
   };
