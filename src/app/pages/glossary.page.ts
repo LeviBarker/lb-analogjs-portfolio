@@ -9,6 +9,8 @@ import { HighlightPipe } from '../pipes/highlight.pipe';
 import { injectLoad, LoadResult } from '@analogjs/router';
 import { GlossaryResponse } from '../services/glossary.service';
 
+import { load } from './glossary.server';
+
 @Component({
   template: `
     <h1>📚&nbsp;Glossary</h1>
@@ -16,7 +18,7 @@ import { GlossaryResponse } from '../services/glossary.service';
     <input type="search" 
            placeholder="Search terms..." 
            [(ngModel)]="searchTerm" />
-    <!-- <ul [aria-busy]="!data().loaded">
+    <ul [aria-busy]="!data()?.loaded">
       @for (entry of filteredEntries(); track entry.fields.id.stringValue) {
         <li>
           <strong [innerHtml]="entry.fields.term.stringValue| highlight: searchTerm()"></strong>
@@ -26,13 +28,13 @@ import { GlossaryResponse } from '../services/glossary.service';
           }
         </li>
       }
-    </ul> -->
+    </ul>
   `,
   imports: [HeroComponent, JsonPipe, HighlightPipe, FormsModule, AsyncPipe],
 })
 export default class Glossary {
 
-  protected readonly data = toSignal(injectLoad());
+  protected readonly data = toSignal(injectLoad<typeof load>());
 
   private readonly route = inject(ActivatedRoute);
   private readonly searchQueryParam = toSignal(this.route.queryParamMap.pipe(map(params => params.get('search') || '')));
@@ -74,11 +76,11 @@ export default class Glossary {
 
   protected readonly filteredEntries = computed(() => {
     const term = this.searchTerm().toLowerCase();
-    // const entries = this.data().terms?.documents ?? [];
-    // return entries.filter(entry =>
-    //   entry.fields.term.stringValue.toLowerCase().includes(term) ||
-    //   entry.fields.description.stringValue.toLowerCase().includes(term)
-    // );
+    const entries = this.data()?.terms?.documents ?? [];
+    return entries.filter(entry =>
+      entry.fields.term.stringValue.toLowerCase().includes(term) ||
+      entry.fields.description.stringValue.toLowerCase().includes(term)
+    );
   });
 
   constructor() {
