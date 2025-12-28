@@ -17,6 +17,9 @@ export default defineConfig(({ mode }) => ({
       ssr: true,
       nitro: {
         preset: 'vercel'
+      },
+      prerender: {
+        routes: ['/', '/manifest']
       }
     }),
     tailwindcss()

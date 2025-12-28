@@ -1,5 +1,4 @@
-import { PageServerLoad } from '@analogjs/router';
-import { GlossaryResponse } from '../services/glossary.service';
+import { GlossaryResponse } from '../models/glossary';
 
 export const load = async () => {
 

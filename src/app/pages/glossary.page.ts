@@ -1,19 +1,19 @@
+import { injectLoad } from '@analogjs/router';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { Component, computed, effect, inject, Input, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 import { HeroComponent } from '../components/hero.component';
 import { HighlightPipe } from '../pipes/highlight.pipe';
-import { injectLoad, LoadResult } from '@analogjs/router';
-import { GlossaryResponse } from '../services/glossary.service';
 
 import { load } from './glossary.server';
+import { PageTitleComponent } from '../components/page-title.component';
 
 @Component({
   template: `
-    <h1>📚&nbsp;Glossary</h1>
+    <app-page-title>📚&nbsp;Glossary</app-page-title>
     <p>Results are retrieved from a <a href="#">cloud document store</a> via an <a href="/glossary?search=http">HTTP</a> request to a <a href="#">serverless cloud function</a>.</p>
     <input type="search" 
            placeholder="Search terms..." 
@@ -30,7 +30,7 @@ import { load } from './glossary.server';
       }
     </ul>
   `,
-  imports: [HeroComponent, JsonPipe, HighlightPipe, FormsModule, AsyncPipe],
+  imports: [HighlightPipe, FormsModule, PageTitleComponent],
 })
 export default class Glossary {
 
@@ -80,7 +80,7 @@ export default class Glossary {
     return entries.filter(entry =>
       entry.fields.term.stringValue.toLowerCase().includes(term) ||
       entry.fields.description.stringValue.toLowerCase().includes(term)
-    );
+    ).sort((a, b) => a.fields.term.stringValue.localeCompare(b.fields.term.stringValue));
   });
 
   constructor() {

@@ -1,0 +1,7 @@
+body > header {
+    position: fixed;
+    width: 100%;
+    max-width: none;
+    padding: 2rem;
+    background-color: var(--pico-background-color);
+}

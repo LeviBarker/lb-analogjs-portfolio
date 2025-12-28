@@ -1,16 +1,14 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
-import { HeroComponent } from '../components/hero.component';
-import { HighlightPipe } from '../pipes/highlight.pipe';
+import { PageTitleComponent } from '../components/page-title.component';
 
 @Component({
   selector: 'app-manifest',
   template: `
-    <h1>📜&nbsp;Manifest</h1>
+    <app-page-title>📜&nbsp;Manifest</app-page-title>
     <p>A manifest is a document that lists the cargo, passengers, and crew of a ship, aircraft, or vehicle, used for customs and other official purposes.  
       In the same way, this page lists the tools, frameworks and paradigms used when making this site.</p>
     <p>The driving factor for many of the choices made when building this site was to use tools with minimal 
@@ -27,7 +25,7 @@ import { HighlightPipe } from '../pipes/highlight.pipe';
       <li>Firebase Functions - <a href="https://firebase.google.com/products/functions" target="_blank" rel="noopener noreferrer">https://firebase.google.com/products/functions</a></li>
     </ul>
   `,
-  imports: [HeroComponent, HighlightPipe, FormsModule, AsyncPipe],
+  imports: [FormsModule, PageTitleComponent],
 })
 export default class Manifest {
   private readonly route = inject(ActivatedRoute);
