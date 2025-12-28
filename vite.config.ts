@@ -14,14 +14,14 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     analog({
-      ssr: true,
+      ssr: false,
       static: true,
       prerender: {
         routes: [],
       },
       nitro: {
-        preset: 'vercel',
-      },
+        preset: 'vercel'
+      }
     }),
     tailwindcss()
   ],
