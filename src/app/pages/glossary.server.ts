@@ -1,6 +1,4 @@
-import { PageServerLoad } from '@analogjs/router';
-
-export const load = async (pageServerLoad: PageServerLoad) => {
+export const load = async () => {
   return {
     loaded: true,
   };
