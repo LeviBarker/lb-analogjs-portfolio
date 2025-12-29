@@ -5,3 +5,9 @@ body > header {
     padding: 2rem;
     background-color: var(--pico-background-color);
 }
+
+body > header > nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
