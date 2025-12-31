@@ -11,3 +11,22 @@ body > header > nav {
     justify-content: space-between;
     align-items: center;
 }
+
+button {
+    border-radius: 99px;
+}
+
+.rich-card-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rich-card-title img {
+    height: 2rem;
+}
+
+.rich-card-title h2 {
+    margin: 0;
+}

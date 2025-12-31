@@ -5,20 +5,22 @@ import { HeroComponent } from '../components/hero.component';
   selector: 'app-home',
   template: `
     <app-hero>
-      <h1>Hi, I'm Levi, welcome to my <a href="/glossary?search=semantic">semantic</a>, <a href="/glossary?search=ssr">server-side-rendered</a>, <a href="/glossary?search=meta-framework">meta-framework</a>-powered website.</h1>
-      <p>In addition to linking to various projects I've worked on, this site aims to showcase the power of modern web development frameworks and paradigms.</p>
+      <h1>👋&nbsp;Hello, I'm <a href="https://www.linkedin.com/in/BarkerLevi/" target="_blank" rel="noopener noreferrer">Levi</a></h1>
+      <p>I've been creating websites and applications for {{yearsOfExperience}}+ years, and am a 
+        <a href="https://www.credly.com/badges/b681b049-4b29-4754-95ec-3c420ae76201/public_url" target="_blank">Google-certified UX designer</a>. 
+      </p>
+      <p>
+        <small><em>This website is built with performance, accessibility, and maintainability in mind.  Check out the <a href="/manifest">manifest</a> to learn more about how it was made.</em></small>
+      </p>
+      <button class="outline" disabled>💬&nbsp;Connect</button>
     </app-hero>
-    <h2>Projects</h2>
-    <article>
-      <h3>Pointing Poker</h3>
-      <p>A simple, free, and open-source online planning poker tool for agile teams.  Built with Angular and Firebase.       <a href="https://pointing.levibarker.com" target="_blank" rel="noopener noreferrer">https://pointing.levibarker.com</a>
-</p>
-      <img src="https://firebasestorage.googleapis.com/v0/b/pointing-poker-89f59.appspot.com/o/public%2Fpointing-poker.png?alt=media&token=dd5f93fc-ead0-4b17-a4eb-1e20243df957" />
-    </article>
   `,
   imports: [HeroComponent],
 })
 export default class Home {
+
+  readonly yearsOfExperience = new Date().getFullYear() - 2016;
+
   onCallToActionClicked() {
     alert('Call to action button clicked!');
   }
