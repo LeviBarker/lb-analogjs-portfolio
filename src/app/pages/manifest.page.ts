@@ -18,6 +18,16 @@ import { PageTitleComponent } from '../components/page-title.component';
           maintained by Google.  Angular provides a robust set of tools and features for building complex web applications.</p>
           <a href="https://angular.io" target="_blank" rel="noopener noreferrer">[Learn more]</a>
     </article>
+    <article>
+      <section class="rich-card-title">
+        <img src="/images/analog-logo.svg" alt="Angular logo" />
+        <h2>Analog</h2>
+      </section>
+      <p>Analog is a fullstack <a href="/glossary?search=meta-framework">meta-framework</a> for building applications and websites with Angular.
+Similar to other meta-frameworks such as Next.JS, Analog provides a simplified DX and makes implementing <a href="/glossary?search=ssr">SSR</a> websites easy.
+      <p>
+                  <a href="https://analogjs.org/" target="_blank" rel="noopener noreferrer">[Learn more]</a>
+    </article>
       <!-- <ul>
       <li>Analog Framework - <a href="https://analogjs.org" target="_blank" rel="noopener noreferrer">https://analogjs.org</a></li>
       <li>Angular - <a href="https://angular.io" target="_blank" rel="noopener noreferrer">https://angular.io</a></li>
